@@ -4,14 +4,12 @@ import { FlatList } from 'react-native'
 import { GroupCard } from '@components/GroupCard'
 import { Header } from '@components/Header'
 import { Highlight } from '@components/Highlight'
+import { ListEmpty } from '@components/ListEmpty'
 
 import { Container } from './styles'
 
 export const Groups = () => {
-  const [groups, setGroups] = useState([
-    "Galera do Ignite",
-    "Galera do React Native",
-  ]);
+  const [groups, setGroups] = useState([]);
 
   return (
     <Container>
@@ -22,6 +20,10 @@ export const Groups = () => {
         data={groups}
         keyExtractor={(item) => item}
         renderItem={({ item }) => <GroupCard title={item} />}
+        contentContainerStyle={groups.length === 0 && { flex: 1 }}
+        ListEmptyComponent={() => (
+          <ListEmpty message="Que tal cadastrar a primeira turma?" />
+        )}
       />
     </Container>
   );
